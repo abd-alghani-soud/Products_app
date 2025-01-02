@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage>
     _controller.forward();
     Timer(
       const Duration(
-        milliseconds: 6500,
+        seconds: 6,
       ),
       () {
         Navigator.pushReplacement(

@@ -17,10 +17,10 @@ class LoginPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(
-            flex: 2,
+            flex: 1,
           ),
           SizedBox(
-            height: 145,
+            height: 150,
             child: Image.asset('assets/images/logs.jpg'),
           ),
           const SizedBox(
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 16.0),
                 child: Text(
-                  'Sign In',
+                  'Log In',
                   style: TextStyle(fontSize: 34, fontWeight: FontWeight.w600),
                 ),
               )
@@ -96,7 +96,7 @@ class LoginPage extends StatelessWidget {
             ],
           ),
           const Spacer(
-            flex: 3,
+            flex: 1,
           ),
         ],
       ),
