@@ -2,32 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:freezed_code/constant.dart';
 
 // ignore: must_be_immutable
-class CustomTextEmail extends StatefulWidget {
-  CustomTextEmail({required this.hintText, super.key});
+class CustomTextFieldPassword extends StatefulWidget {
+  CustomTextFieldPassword({required this.hintText, super.key});
 
   String hintText;
 
   @override
-  State<CustomTextEmail> createState() => _CustomTextEmailState();
+  State<CustomTextFieldPassword> createState() =>
+      _CustomTextFieldPasswordState();
 }
 
-class _CustomTextEmailState extends State<CustomTextEmail> {
+class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: true,
       // validator: (data) {
       //   if (data!.isEmpty) {
       //     return "it's required";
-      //   } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$').hasMatch(data)) {
-      //     return "please enter a valid email";
+      //   } else if (data.length < 8) {
+      //     return "password At least 8 character";
       //   }
       // },
       // onChanged: onChanged,
       decoration: InputDecoration(
         suffixIcon: const Icon(
-          Icons.email,
+          Icons.lock,
           size: 28,
-          color: kColorOr,
+          color:kColorOr,
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
@@ -36,7 +38,7 @@ class _CustomTextEmailState extends State<CustomTextEmail> {
         hintText: widget.hintText,
         hintStyle: const TextStyle(
           fontSize: 22,
-          color: Colors.black,
+          color: kColorBl,
         ),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -45,7 +47,7 @@ class _CustomTextEmailState extends State<CustomTextEmail> {
         ),
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(
-            color: kColorBl,
+            color: Colors.red,
           ),
         ),
         focusedBorder: const OutlineInputBorder(
