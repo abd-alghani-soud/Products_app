@@ -1,11 +1,13 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:freezed_code/constant.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({required this.text, super.key});
+  CustomButton({this.onTap, required this.text, super.key});
 
   final String text;
-
+  void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +26,7 @@ class CustomButton extends StatelessWidget {
             kColorBl,
           ),
         ),
-        onPressed: () {},
+        onPressed: onTap,
         child: Text(
           text,
           style: const TextStyle(
