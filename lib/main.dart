@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_code/blocs/auth/auth_bloc.dart';
 import 'package:freezed_code/views/home_page.dart';
 
 import 'firebase_options.dart';
@@ -15,9 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return BlocProvider(
+      create: (BuildContext context) => AuthBloc()..add(CheakAuthStatusEvent()),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
     );
   }
 }
