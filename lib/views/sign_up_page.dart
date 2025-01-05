@@ -63,10 +63,11 @@ class SignUpPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 24),
                     SizedBox(
-                      height: 130,
+                      height: 140,
                       child: Image.asset(
-                        'assets/images/logs.jpg',
+                        'assets/images/log.jpg',
                         errorBuilder: (context, error, stackTrace) {
                           return const Icon(Icons.error,
                               size: 100, color: Colors.red);
@@ -74,7 +75,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     const Row(
                       children: [
@@ -91,7 +92,7 @@ class SignUpPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 8,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
