@@ -3,8 +3,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Api {
-  Future<dynamic> get({required String uri}) async {
-    http.Response response = await http.get(Uri.parse(uri));
+  Future<dynamic> get({required String uri, String? token}) async {
+    Map<String, String> headers = {};
+
+    if (token != null) {
+      headers.addAll({'Authorization': 'Bearer $token'});
+    }
+    http.Response response = await http.get(Uri.parse(uri), headers: headers);
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
