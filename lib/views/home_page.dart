@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_code/constant.dart';
 import 'package:freezed_code/views/login_page.dart';
+import 'package:freezed_code/views/products_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,17 +39,29 @@ class _HomePageState extends State<HomePage>
       ),
     );
     _controller.forward();
+
     Timer(
       const Duration(
-        seconds: 6,
+        seconds: 5,
       ),
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>  LoginPage(),
-          ),
-        );
+          () {
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProductsPage(),
+            ),
+          );
+        } else {
+          // User is not signed in, navigate to LoginPage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
+        }
       },
     );
   }
