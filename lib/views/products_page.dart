@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:freezed_code/constant.dart';
+import 'package:freezed_code/widgets/custom_card.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -32,59 +33,24 @@ class ProductsPage extends StatelessWidget {
         elevation: 0,
       ),
       // ignore: sized_box_for_whitespace
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              spreadRadius: 0,
-              blurRadius: 40,
-              offset: const Offset(10, 10),
-              color: Colors.grey.withOpacity(.2),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 16.0,
+          right: 16,
+          top: 70,
         ),
-        height: 150,
-        width: 220,
-        child: Card(
-          elevation: 10,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 4,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "bugs",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      r"$200",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            ),
+        child: GridView.builder(
+          clipBehavior: Clip.none,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 0,
+            childAspectRatio: 1.4,
+            mainAxisSpacing: 80,
           ),
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return const CustomCard();
+          },
         ),
       ),
     );
