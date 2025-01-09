@@ -63,9 +63,9 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 24),
+                    // const SizedBox(height: 24),
                     SizedBox(
-                      height: 140,
+                      height: 130,
                       child: Image.asset(
                         'assets/images/log.jpg',
                         errorBuilder: (context, error, stackTrace) {
