@@ -5,7 +5,7 @@ class ProductsModel {
   final String description;
   final String category;
   final String image;
-  final RatingModel ratings;
+  final RatingModel rating;
 
   ProductsModel({
     required this.id,
@@ -14,20 +14,20 @@ class ProductsModel {
     required this.description,
     required this.category,
     required this.image,
-    required this.ratings,
+    required this.rating,
   });
 
   factory ProductsModel.fromJson(jsonData) {
     return ProductsModel(
-      id: jsonData['id'],
-      title: jsonData['title'],
-      price: jsonData['price'],
-      description: jsonData['description'],
-      category: jsonData['category'],
-      image: jsonData['image'],
-      ratings: RatingModel.fromJson(
-        jsonData['ratings'],
-      ),
+      id: jsonData['id'] ?? 0,
+      title: jsonData['title'] ?? "No Title",
+      price: (jsonData['price'] as num?)?.toDouble() ?? 0.0,
+      description: jsonData['description'] ?? "No Description",
+      category: jsonData['category'] ?? "No Category",
+      image: jsonData['image'] ?? "",
+      rating: jsonData['rating'] != null
+          ? RatingModel.fromJson(jsonData['rating'])
+          : RatingModel(rate: 0.0, count: 0),
     );
   }
 }
@@ -43,8 +43,8 @@ class RatingModel {
 
   factory RatingModel.fromJson(jsonData) {
     return RatingModel(
-      rate: jsonData['rate'],
-      count: jsonData['count'],
+      rate: (jsonData['rate'] as num?)?.toDouble() ?? 0.0,
+      count: jsonData['count'] ?? 0,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_code/models/products_model.dart';
 
+// ignore: must_be_immutable
 class CustomCard extends StatelessWidget {
   CustomCard({required this.products, super.key});
 
@@ -46,7 +47,7 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        r'$' '${products.price}',
+                        r'$' '${products.price.toString()}',
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -66,7 +67,7 @@ class CustomCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: -40,
+          top: -50,
           right: 32,
           child: Image.network(
             products.image,
