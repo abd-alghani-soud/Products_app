@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_code/constant.dart';
 import 'package:freezed_code/models/products_model.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +14,7 @@ class CustomCard extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            // color: kColorOr,
+            color: kColorWh,
             boxShadow: [
               BoxShadow(
                 spreadRadius: 0,
