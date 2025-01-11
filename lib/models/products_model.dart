@@ -1,7 +1,7 @@
 class ProductsModel {
-  final int id;
+  final dynamic id;
   final String title;
-  final double price;
+  final dynamic price;
   final String description;
   final String category;
   final String image;
@@ -21,7 +21,7 @@ class ProductsModel {
     return ProductsModel(
       id: jsonData['id'] ?? 0,
       title: jsonData['title'] ?? "No Title",
-      price: (jsonData['price'] as num?)?.toDouble() ?? 0.0,
+      price: (jsonData['price']) ?? 0.0,
       description: jsonData['description'] ?? "No Description",
       category: jsonData['category'] ?? "No Category",
       image: jsonData['image'] ?? "",

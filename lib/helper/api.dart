@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
@@ -53,6 +54,7 @@ class Api {
     if (token != null) {
       headers.addAll({'Authorization': 'Bearer $token'});
     }
+    debugPrint('url $url body $body $token');
     http.Response response = await http.put(
       Uri.parse(url),
       body: body,
@@ -61,6 +63,7 @@ class Api {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = json.decode(response.body);
+      debugPrint('$data');
       return data;
     } else {
       throw Exception(
