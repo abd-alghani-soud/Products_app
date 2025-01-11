@@ -3,19 +3,23 @@ import 'package:freezed_code/constant.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
-  CustomTextField(
-      {this.keyboardType = TextInputType.text,
-      this.onChanged,
+  CustomTextField({
+    super.key,
+    this.keyboardType = TextInputType.text,
+    this.onChanged,
       required this.hintText,
-      super.key});
+    this.initialValue,
+  });
 
+  final String? initialValue;
   final String hintText;
   void Function(String)? onChanged;
   TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       keyboardType: keyboardType,
       onChanged: onChanged,
       // onChanged: onChanged,

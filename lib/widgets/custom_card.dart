@@ -4,19 +4,32 @@ import 'package:freezed_code/models/products_model.dart';
 import 'package:freezed_code/views/update_products_page.dart';
 
 // ignore: must_be_immutable
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
   CustomCard({required this.products, super.key});
 
   ProductsModel products;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(
+      onTap: () async {
+        final updatedProduct = await Navigator.pushNamed(
           context,
           UpdateProductsPage.id,
-          arguments: products,
+          arguments: widget.products,
         );
+        if (mounted &&
+            updatedProduct != null &&
+            updatedProduct is ProductsModel) {
+          setState(() {
+            widget.products = updatedProduct;
+          });
+        }
       },
       child: Stack(
         clipBehavior: Clip.none,
@@ -35,7 +48,6 @@ class CustomCard extends StatelessWidget {
             ),
             child: Card(
               borderOnForeground: false,
-              // color: kColorOr,
               elevation: 10,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -47,7 +59,9 @@ class CustomCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      products.title.substring(0, 7),
+                      widget.products.title.length > 7
+                          ? widget.products.title.substring(0, 7)
+                          : widget.products.title,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -57,7 +71,7 @@ class CustomCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          r'$' '${products.price.toString()}',
+                          r'$' '${widget.products.price.toString()}',
                           style: const TextStyle(
                             fontSize: 16,
                           ),
@@ -80,7 +94,7 @@ class CustomCard extends StatelessWidget {
             top: -50,
             right: 32,
             child: Image.network(
-              products.image,
+              widget.products.image,
               height: 100,
               width: 100,
             ),

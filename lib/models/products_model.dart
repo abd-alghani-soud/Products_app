@@ -21,7 +21,9 @@ class ProductsModel {
     return ProductsModel(
       id: jsonData['id'] ?? 0,
       title: jsonData['title'] ?? "No Title",
-      price: (jsonData['price']) ?? 0.0,
+      price: jsonData['price'] is String
+          ? jsonData['price']
+          : jsonData['price'].toString(),
       description: jsonData['description'] ?? "No Description",
       category: jsonData['category'] ?? "No Category",
       image: jsonData['image'] ?? "",
