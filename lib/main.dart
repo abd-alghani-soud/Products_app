@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_code/blocs/auth/auth_bloc.dart';
 import 'package:freezed_code/views/first_page.dart';
+import 'package:freezed_code/views/update_products_page.dart';
 
 import 'firebase_options.dart';
 
@@ -19,9 +20,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => AuthBloc()..add(CheakAuthStatusEvent()),
-      child: const MaterialApp(
+      child: MaterialApp(
+        routes: {
+          FirstPage.id: (context) => const FirstPage(),
+          UpdateProductsPage.id: (context) => const UpdateProductsPage(),
+        },
         debugShowCheckedModeBanner: false,
-        home: FirstPage(),
+        initialRoute: FirstPage.id,
       ),
     );
   }

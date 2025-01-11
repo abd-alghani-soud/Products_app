@@ -9,7 +9,7 @@ import 'package:freezed_code/views/products_page.dart';
 
 class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
-
+  static String id = 'First page';
   @override
   State<FirstPage> createState() => _FirstPageState();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_code/constant.dart';
 import 'package:freezed_code/models/products_model.dart';
 import 'package:freezed_code/services/get_all_products_services.dart';
 import 'package:freezed_code/widgets/custom_card.dart';
@@ -19,13 +20,16 @@ class HomePage extends StatelessWidget {
           future: GetAllProductsServices().getAllProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: kColorOr,
+              ));
             } else if (snapshot.hasError) {
               debugPrint('${snapshot.error}');
-              return Center(
+              return const Center(
                 child: Text(
-                  'Error: ${snapshot.error}',
-                  style: const TextStyle(
+                  'Error: NetWork failed',
+                  style: TextStyle(
                     color: Colors.red,
                     fontSize: 16,
                   ),

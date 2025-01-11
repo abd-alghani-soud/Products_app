@@ -6,6 +6,7 @@ import 'package:freezed_code/views/favorites_page.dart';
 import 'package:freezed_code/views/home_page.dart';
 import 'package:freezed_code/views/profile_page.dart';
 import 'package:freezed_code/views/search_page.dart';
+import 'package:freezed_code/views/shopping_cart_page.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -27,9 +28,17 @@ class ProductsPage extends StatelessWidget {
             backgroundColor: Colors.white,
             appBar: selectedIndex == 0
                 ? AppBar(
+                    automaticallyImplyLeading: false,
                     actions: <Widget>[
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ShoppingCartPage(),
+                            ),
+                          );
+                        },
                         icon: const Icon(
                           Icons.shopping_cart,
                           color: kColorBl,
@@ -37,7 +46,7 @@ class ProductsPage extends StatelessWidget {
                         ),
                       ),
                     ],
-                    backgroundColor: Colors.orange,
+                    backgroundColor: kColorOr,
                     centerTitle: true,
                     title: const Text(
                       "New Trend",
