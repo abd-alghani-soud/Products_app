@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_code/constant.dart';
+import 'package:freezed_code/cubits/update_products/update_products_cubit.dart';
 import 'package:freezed_code/models/products_model.dart';
 import 'package:freezed_code/services/get_all_products_services.dart';
 import 'package:freezed_code/widgets/custom_card.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Future<List<ProductsModel>>? future;
+
+  @override
+  void initState() {
+    super.initState();
+    future = GetAllProductsServices().getAllProducts();
+  }
+
+  void reloadProducts() {
+    setState(() {
+      future = GetAllProductsServices().getAllProducts();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(
           left: 16.0,
@@ -17,13 +39,13 @@ class HomePage extends StatelessWidget {
           top: 60,
         ),
         child: FutureBuilder<List<ProductsModel>>(
-          future: GetAllProductsServices().getAllProducts(),
+          future: future,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                   child: CircularProgressIndicator(
-                color: kColorOr,
-              ));
+                    color: kColorOr,
+                  ));
             } else if (snapshot.hasError) {
               debugPrint('${snapshot.error}');
               return const Center(
@@ -49,6 +71,7 @@ class HomePage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return CustomCard(
                     products: products[index],
+                    onReload: reloadProducts,
                   );
                 },
               );

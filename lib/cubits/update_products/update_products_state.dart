@@ -10,8 +10,15 @@ class UpdateProductsLoadingState extends UpdateProductsState {}
 class UpdateProductsLoadedState extends UpdateProductsState {
   final String? title, price, image, description;
 
-  UpdateProductsLoadedState(this.title, this.price, this.image, this.description);
+  UpdateProductsLoadedState(
+      this.title,
+      this.price,
+      this.image,
+      this.description,
+      );
 }
+
+
 class UpdateProductsSuccessState extends UpdateProductsState {}
 
 class UpdateProductsFailureState extends UpdateProductsState {

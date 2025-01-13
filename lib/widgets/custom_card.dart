@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_code/constant.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_code/cubits/update_products/update_products_cubit.dart';
 import 'package:freezed_code/models/products_model.dart';
 import 'package:freezed_code/views/update_products_page.dart';
 
-// ignore: must_be_immutable
-class CustomCard extends StatefulWidget {
-  CustomCard({required this.products, super.key});
+class CustomCard extends StatelessWidget {
+  final ProductsModel products;
+  final VoidCallback onReload;
 
-  ProductsModel products;
+  const CustomCard({required this.products, required this.onReload, super.key});
 
-  @override
-  State<CustomCard> createState() => _CustomCardState();
-}
-
-class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        final updatedProduct = await Navigator.pushNamed(
+        final result = await Navigator.pushNamed(
           context,
           UpdateProductsPage.id,
-          arguments: widget.products,
+          arguments: products,
         );
-        if (mounted &&
-            updatedProduct != null &&
-            updatedProduct is ProductsModel) {
-          setState(() {
-            widget.products = updatedProduct;
-          });
+        if (result == true) {
+          // ignore: use_build_context_synchronously
+          context.read<UpdateProductsCubit>().reloadProducts();
         }
       },
       child: Stack(
@@ -36,7 +29,6 @@ class _CustomCardState extends State<CustomCard> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: kColorWh,
               boxShadow: [
                 BoxShadow(
                   spreadRadius: 0,
@@ -47,7 +39,7 @@ class _CustomCardState extends State<CustomCard> {
               ],
             ),
             child: Card(
-              borderOnForeground: false,
+              color: Colors.white,
               elevation: 10,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -59,9 +51,9 @@ class _CustomCardState extends State<CustomCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.products.title.length > 7
-                          ? widget.products.title.substring(0, 7)
-                          : widget.products.title,
+                      products.title.length > 7
+                          ? products.title.substring(0, 7)
+                          : products.title,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -71,7 +63,7 @@ class _CustomCardState extends State<CustomCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          r'$' '${widget.products.price.toString()}',
+                          r'$' '${products.price.toString()}',
                           style: const TextStyle(
                             fontSize: 16,
                           ),
@@ -94,7 +86,7 @@ class _CustomCardState extends State<CustomCard> {
             top: -50,
             right: 32,
             child: Image.network(
-              widget.products.image,
+              products.image,
               height: 100,
               width: 100,
             ),
