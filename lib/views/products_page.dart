@@ -5,15 +5,15 @@ import 'package:freezed_code/cubits/navigate_pages/navigate_page_cubit.dart';
 import 'package:freezed_code/views/favorites_page.dart';
 import 'package:freezed_code/views/home_page.dart';
 import 'package:freezed_code/views/profile_page.dart';
-import 'package:freezed_code/views/search_page.dart';
 import 'package:freezed_code/views/shopping_cart_page.dart';
+import 'package:freezed_code/widgets/search_delegate.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
 
   final List<Widget> _pages = const [
     HomePage(),
-    SearchPage(),
+    ShoppingCartPage(),
     FavoritesPage(),
     ProfilePage(),
   ];
@@ -32,17 +32,15 @@ class ProductsPage extends StatelessWidget {
                     actions: <Widget>[
                       IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ShoppingCartPage(),
-                            ),
+                          showSearch(
+                            context: context,
+                            delegate: ProductsSearchDelegate(),
                           );
                         },
                         icon: const Icon(
-                          Icons.shopping_cart,
+                          Icons.search,
                           color: kColorBl,
-                          size: 26,
+                          size: 32,
                         ),
                       ),
                     ],
@@ -76,7 +74,7 @@ class ProductsPage extends StatelessWidget {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.search,
+                    Icons.shopping_cart,
                   ),
                   label: 'Search',
                 ),

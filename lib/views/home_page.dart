@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_code/constant.dart';
-import 'package:freezed_code/cubits/update_products/update_products_cubit.dart';
 import 'package:freezed_code/models/products_model.dart';
 import 'package:freezed_code/services/get_all_products_services.dart';
 import 'package:freezed_code/widgets/custom_card.dart';
@@ -79,7 +77,10 @@ class _HomePageState extends State<HomePage> {
               return const Center(
                 child: Text(
                   'No products available.',
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey,
+                  ),
                 ),
               );
             }

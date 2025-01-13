@@ -5,9 +5,10 @@ import 'package:freezed_code/services/update_products.dart';
 import 'package:hive/hive.dart';
 
 part 'update_products_state.dart';
+
 class UpdateProductsCubit extends Cubit<UpdateProductsState> {
   UpdateProductsCubit() : super(UpdateProductsInitial());
-
+  List<ProductsModel>? model;
   String? title, price, image, description, category;
 
   Future<void> loadSavedData() async {
@@ -19,17 +20,31 @@ class UpdateProductsCubit extends Cubit<UpdateProductsState> {
       image = product['image'];
       description = product['description'];
       category = product['category'];
+
+      // هنا نضمن تمرير الـ id أيضًا
+      model = [
+        ProductsModel(
+          id: product['id'],
+          // التأكد من تمرير الـ id هنا
+          title: title ?? '',
+          price: double.parse(price ?? '0.0'),
+          image: image ?? '',
+          description: description ?? '',
+          category: category ?? '',
+          rating: product['rating'],
+        ),
+      ];
     }
     emit(UpdateProductsLoadedState(title, price, image, description));
   }
 
   Future<void> updateProducts(ProductsModel products) async {
     emit(UpdateProductsLoadingState());
-
     try {
-      // Call update service
+      // هنا نمرر الـ id بشكل صحيح
       await UpdateProducts().updateProducts(
         id: products.id,
+        // تأكد من أن id يتم تمريره هنا
         title: title ?? products.title,
         image: image ?? products.image,
         price: price ?? products.price.toString(),
@@ -37,9 +52,9 @@ class UpdateProductsCubit extends Cubit<UpdateProductsState> {
         category: category ?? products.category,
       );
 
-      // بعد التحديث، احفظ البيانات المحدثة في Hive
       final box = Hive.box('productsBox');
       box.put('product', {
+        'id': products.id,
         'title': title ?? products.title,
         'price': price ?? products.price.toString(),
         'image': image ?? products.image,
@@ -57,6 +72,6 @@ class UpdateProductsCubit extends Cubit<UpdateProductsState> {
 
   void reloadProducts() {
     emit(UpdateProductsLoadedState(title, price, image, description));
-    loadSavedData();  // إعادة تحميل البيانات من Hive
+    loadSavedData();
   }
 }

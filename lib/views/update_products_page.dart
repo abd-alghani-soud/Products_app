@@ -35,7 +35,7 @@ class _UpdateProductsPageState extends State<UpdateProductsPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Product updated successfully')),
             );
-            Navigator.pop(context, true); // العودة مع إشعار التحديث
+            Navigator.pop(context, true);
           } else if (state is UpdateProductsFailureState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Error: ${state.error}')),

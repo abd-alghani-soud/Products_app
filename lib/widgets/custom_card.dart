@@ -6,9 +6,9 @@ import 'package:freezed_code/views/update_products_page.dart';
 
 class CustomCard extends StatelessWidget {
   final ProductsModel products;
-  final VoidCallback onReload;
+  final VoidCallback? onReload;
 
-  const CustomCard({required this.products, required this.onReload, super.key});
+  const CustomCard({required this.products, this.onReload, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,7 @@ class CustomCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      products.title.length > 7
-                          ? products.title.substring(0, 7)
-                          : products.title,
+                      products.title.substring(0, 7),
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
