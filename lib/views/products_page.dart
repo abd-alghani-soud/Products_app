@@ -6,7 +6,7 @@ import 'package:freezed_code/views/favorites_page.dart';
 import 'package:freezed_code/views/home_page.dart';
 import 'package:freezed_code/views/profile_page.dart';
 import 'package:freezed_code/views/shopping_cart_page.dart';
-import 'package:freezed_code/widgets/search_delegate.dart';
+
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -31,12 +31,7 @@ class ProductsPage extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     actions: <Widget>[
                       IconButton(
-                        onPressed: () {
-                          showSearch(
-                            context: context,
-                            delegate: ProductsSearchDelegate(),
-                          );
-                        },
+                        onPressed: () {},
                         icon: const Icon(
                           Icons.search,
                           color: kColorBl,

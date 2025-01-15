@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_code/cubits/update_products/update_products_cubit.dart';
 import 'package:freezed_code/models/products_model.dart';
-import 'package:freezed_code/views/update_products_page.dart';
 
 class CustomCard extends StatelessWidget {
   final ProductsModel products;
-  final VoidCallback? onReload;
 
-  const CustomCard({required this.products, this.onReload, super.key});
+  const CustomCard({required this.products, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        final result = await Navigator.pushNamed(
-          context,
-          UpdateProductsPage.id,
-          arguments: products,
-        );
-        if (result == true) {
-          // ignore: use_build_context_synchronously
-          context.read<UpdateProductsCubit>().reloadProducts();
-        }
+      onTap: () {
+
       },
       child: Stack(
         clipBehavior: Clip.none,

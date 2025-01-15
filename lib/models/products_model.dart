@@ -1,3 +1,5 @@
+
+
 class ProductsModel {
   final dynamic id;
   final String title;
@@ -17,7 +19,7 @@ class ProductsModel {
     required this.rating,
   });
 
-  factory ProductsModel.fromJson(jsonData) {
+  factory ProductsModel.fromJson(Map<String, dynamic> jsonData) {
     return ProductsModel(
       id: jsonData['id'] ?? 0,
       title: jsonData['title'] ?? "No Title",
@@ -32,6 +34,18 @@ class ProductsModel {
           : RatingModel(rate: 0.0, count: 0),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'price': price,
+      'description': description,
+      'category': category,
+      'image': image,
+      'rating': rating.toJson(),
+    };
+  }
 }
 
 class RatingModel {
@@ -43,10 +57,17 @@ class RatingModel {
     required this.count,
   });
 
-  factory RatingModel.fromJson(jsonData) {
+  factory RatingModel.fromJson(Map<String, dynamic> jsonData) {
     return RatingModel(
       rate: (jsonData['rate'] as num?)?.toDouble() ?? 0.0,
       count: jsonData['count'] ?? 0,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'rate': rate,
+      'count': count,
+    };
   }
 }

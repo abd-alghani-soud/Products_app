@@ -69,7 +69,6 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   return CustomCard(
                     products: products[index],
-                    onReload: reloadProducts,
                   );
                 },
               );
