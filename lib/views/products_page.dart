@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_code/constant.dart';
+import 'package:freezed_code/cubits/add_favorite/add_favorite_cubit.dart';
+
 import 'package:freezed_code/cubits/navigate_pages/navigate_page_cubit.dart';
 import 'package:freezed_code/views/favorites_page.dart';
 import 'package:freezed_code/views/home_page.dart';
 import 'package:freezed_code/views/profile_page.dart';
 import 'package:freezed_code/views/shopping_cart_page.dart';
-
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -20,6 +21,8 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoritesCubit = context.read<FavoritesCubit>();
+
     return BlocProvider(
       create: (context) => NavigatePageCubit(),
       child: BlocBuilder<NavigatePageCubit, int>(
@@ -28,31 +31,34 @@ class ProductsPage extends StatelessWidget {
             backgroundColor: Colors.white,
             appBar: selectedIndex == 0
                 ? AppBar(
-                    automaticallyImplyLeading: false,
-                    actions: <Widget>[
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.search,
-                          color: kColorBl,
-                          size: 32,
-                        ),
-                      ),
-                    ],
-                    backgroundColor: kColorOr,
-                    centerTitle: true,
-                    title: const Text(
-                      "New Trend",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: kColorBl,
-                      ),
-                    ),
-                    elevation: 0,
-                  )
+              automaticallyImplyLeading: false,
+              actions: <Widget>[
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.search,
+                    color: kColorBl,
+                    size: 32,
+                  ),
+                ),
+              ],
+              backgroundColor: kColorOr,
+              centerTitle: true,
+              title: const Text(
+                "New Trend",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: kColorBl,
+                ),
+              ),
+              elevation: 0,
+            )
                 : null,
-            body: _pages[selectedIndex],
+            body: BlocProvider.value(
+              value: favoritesCubit, // ننقل الـFavoritesCubit هنا
+              child: _pages[selectedIndex],
+            ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectedIndex,
               onTap: (index) =>

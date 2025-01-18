@@ -1,9 +1,7 @@
-
-
 class ProductsModel {
-  final dynamic id;
+  final int id;
   final String title;
-  final dynamic price;
+  final double price;
   final String description;
   final String category;
   final String image;
@@ -21,16 +19,14 @@ class ProductsModel {
 
   factory ProductsModel.fromJson(Map<String, dynamic> jsonData) {
     return ProductsModel(
-      id: jsonData['id'] ?? 0,
-      title: jsonData['title'] ?? "No Title",
-      price: jsonData['price'] is String
-          ? jsonData['price']
-          : jsonData['price'].toString(),
-      description: jsonData['description'] ?? "No Description",
-      category: jsonData['category'] ?? "No Category",
-      image: jsonData['image'] ?? "",
+      id: jsonData['id'] as int? ?? 0,
+      title: jsonData['title'] as String? ?? "No Title",
+      price: (jsonData['price'] as num?)?.toDouble() ?? 0.0,
+      description: jsonData['description'] as String? ?? "No Description",
+      category: jsonData['category'] as String? ?? "No Category",
+      image: jsonData['image'] as String? ?? "",
       rating: jsonData['rating'] != null
-          ? RatingModel.fromJson(jsonData['rating'])
+          ? RatingModel.fromJson(jsonData['rating'] as Map<String, dynamic>)
           : RatingModel(rate: 0.0, count: 0),
     );
   }
@@ -46,6 +42,19 @@ class ProductsModel {
       'rating': rating.toJson(),
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is ProductsModel &&
+              runtimeType == other.runtimeType &&
+              id == other.id;
+  @override
+  int get hashCode => id.hashCode;
+  @override
+  String toString() {
+    return 'ProductsModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
+  }
 }
 
 class RatingModel {
@@ -60,7 +69,7 @@ class RatingModel {
   factory RatingModel.fromJson(Map<String, dynamic> jsonData) {
     return RatingModel(
       rate: (jsonData['rate'] as num?)?.toDouble() ?? 0.0,
-      count: jsonData['count'] ?? 0,
+      count: jsonData['count'] as int? ?? 0,
     );
   }
 
@@ -69,5 +78,10 @@ class RatingModel {
       'rate': rate,
       'count': count,
     };
+  }
+
+  @override
+  String toString() {
+    return 'RatingModel(rate: $rate, count: $count)';
   }
 }

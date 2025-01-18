@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_code/blocs/auth/auth_bloc.dart';
+import 'package:freezed_code/cubits/add_favorite/add_favorite_cubit.dart';
 import 'package:freezed_code/views/first_page.dart';
 import 'firebase_options.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context)=>FavoritesCubit()),
         BlocProvider(
           create: (BuildContext context) => AuthBloc()
             ..add(
