@@ -56,7 +56,7 @@ class ProductsPage extends StatelessWidget {
             )
                 : null,
             body: BlocProvider.value(
-              value: favoritesCubit, // ننقل الـFavoritesCubit هنا
+              value: favoritesCubit,
               child: _pages[selectedIndex],
             ),
             bottomNavigationBar: BottomNavigationBar(

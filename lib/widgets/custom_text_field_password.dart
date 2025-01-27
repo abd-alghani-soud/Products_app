@@ -3,8 +3,7 @@ import 'package:freezed_code/constant.dart';
 
 // ignore: must_be_immutable
 class CustomTextFieldPassword extends StatelessWidget {
-  CustomTextFieldPassword(
-      {this.onChanged, required this.hintText, super.key});
+  CustomTextFieldPassword({this.onChanged, required this.hintText, super.key,});
 
   void Function(String)? onChanged;
   String hintText;
