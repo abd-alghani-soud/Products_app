@@ -36,12 +36,29 @@ Emulator or real device for testing
 bash
 
 lib/
- ┣ screens/       # UI screens for product list and forms
- ┣ models/        # Product model
- ┣ widgets/       # Reusable components
- ┗ main.dart      # Entry point of the app
-assets/           # Images and static resources
-pubspec.yaml      # Dependencies and asset declarations
+├── blocs/                # Business logic components (e.g. cart, favorites)
+
+├── cubits/               # Lightweight state management using Cubit
+
+├── generated/            # Auto-generated files (e.g. localization, assets)
+
+├── helper/               # Utility functions and helpers
+
+├── models/               # Data models like Product, User, etc.
+
+├── services/             # API services and backend integration
+
+├── views/                # UI screens for the app (product list, profile...)
+
+├── widgets/              # Reusable UI components (buttons, inputs, etc.)
+
+├── constant.dart         # App-wide constants (colors, styles, etc.)
+
+├── firebase_options.dart # Firebase config (auto-generated)
+
+├──main.dart              # Entry point of the app
+
+└──pubspec.yaml           # Dependencies and asset declarations
 
 🤝 Contributing
 
