@@ -31,6 +31,7 @@ Android Studio or VS Code with Flutter & Dart extensions
 Emulator or real device for testing
 
 🗂️ Project Structure
+
 bash
 
 lib/
@@ -40,11 +41,14 @@ lib/
  ┗ main.dart      # Entry point of the app
 assets/           # Images and static resources
 pubspec.yaml      # Dependencies and asset declarations
+
 🤝 Contributing
+
 We ❤️ open source! Feel free to fork the project, make your improvements, and submit a pull request:
 bash
 
 git checkout -b feature/YourFeatureName
+
 After implementing your changes, push and open a PR. Let’s build something great together!
 
 📄 License
